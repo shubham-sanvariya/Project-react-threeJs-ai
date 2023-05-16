@@ -11,7 +11,20 @@ const Home = () => {
   const snap = useSnapshot(state);
 
   return (
-    <div>Home</div>
+    <AnimatePresence>
+      {snap.intro && (
+        // motion.div means it is going to be a normal div but with some animations
+        <motion.section className="home" {...slideAnimation('left')}> 
+          <motion.header>
+            <img 
+              src="./threejs.png"
+              alt="logo"
+              className="w-8 h-8 object-contain"
+            />
+          </motion.header>
+        </motion.section>
+      )}
+    </AnimatePresence>
   )
 }
 
