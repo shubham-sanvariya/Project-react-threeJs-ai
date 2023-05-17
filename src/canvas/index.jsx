@@ -1,6 +1,10 @@
 import React from 'react'
 
-const Canvas = () => {
+import Shirt from './Shirt'
+import Backdrop from './Backdrop'
+import CamerRig from './CamerRig'
+
+const CanvasModel = () => {
   return (
     <div>Canvas</div>
   )
