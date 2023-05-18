@@ -12,12 +12,12 @@ const CanvasModel = () => {
       <ambientLight intensity={0.5} />
       <Environment preset="city" />
 
-      {/* <CamerRig> */}
+      <CamerRig>
         {/* <Backdrop /> */}
         <Center>
           <Shirt />
         </Center>
-      {/* </CamerRig> */}
+      </CamerRig>
     </Canvas>
   )
 }
