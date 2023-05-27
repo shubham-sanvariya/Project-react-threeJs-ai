@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 import { AnimatePresence, motion } from 'framer-motion';
@@ -13,6 +13,32 @@ import { fadeAnimation, slideAnimation } from '../config/motion';
 import { AIPicker, ColorPicker, CustomButton, FilePicker, Tab } from '../components';
 const Customizer = () => {
   const snap = useSnapshot(state);
+
+  const [file, setFile] = useState('');
+
+  const [prompt, setPrompt] = useState('');
+  const [generatingImg, setGeneratingImg] = useState(false);
+
+  const [actvieEditorTab, setActvieEditorTab] = useState("");
+  const [activeFilterTab, setActvieFilterTab] = useState({
+    logoShirt: true,
+    stylishShirt: false,
+  })
+
+  // show tab content depending on the activeTab
+  const generateTabContent = () => {
+    switch (actvieEditorTab) {
+      case "colorpicker":
+        return <ColorPicker />
+      case "filepicker":
+        return <FilePicker />
+      case "aipicker":
+        return <AIPicker />
+    
+      default:
+        return null;
+    }
+  }
 
   return (
     <AnimatePresence>
@@ -29,9 +55,11 @@ const Customizer = () => {
                   <Tab 
                     key={tab.name}
                     tab={tab}
-                    handleClick={() => {}}
+                    handleClick={() => setActvieEditorTab(tab.name)}
                     />
                 ))}
+
+                {generateTabContent()}
               </div>
             </div>
           </motion.div>
