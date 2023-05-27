@@ -13,7 +13,7 @@ const CanvasModel = () => {
       <Environment preset="city" />
 
       <CamerRig>
-        {/* <Backdrop /> */}
+        <Backdrop />
         <Center>
           <Shirt />
         </Center>
