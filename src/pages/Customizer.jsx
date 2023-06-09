@@ -11,6 +11,7 @@ import { downloadCanvasToImage, reader } from '../config/helpers';
 import { EditorTabs, FilterTabs, DecalTypes } from '../config/constants';
 import { fadeAnimation, slideAnimation } from '../config/motion';
 import { AIPicker, ColorPicker, CustomButton, FilePicker, Tab } from '../components';
+import { act } from '@react-three/fiber';
 const Customizer = () => {
   const snap = useSnapshot(state);
 
@@ -31,7 +32,10 @@ const Customizer = () => {
       case "colorpicker":
         return <ColorPicker />
       case "filepicker":
-        return <FilePicker />
+        return <FilePicker
+        file={file}
+        setFile={setFile}
+        />
       case "aipicker":
         return <AIPicker />
     
@@ -39,6 +43,30 @@ const Customizer = () => {
         return null;
     }
   }
+
+  const handleDecals = (type, result) => {
+    const decalType = DecalTypes[type];
+
+    state[decalType.stateProperty] = result;
+
+    if(!activeFilterTab[decalType.filterTab]) {
+      handleActiveFilterTAb(decalType.filterTab)
+    }
+  }
+
+  const handleActiveFilterTAb = (tabName) => {
+    switch (tabName) {
+      case "logoShirt":
+        state.isLogoTexture = !activeFilterTab[tabName];
+        break;
+      case "stylishShirt":
+        state.isFullTexture = !activeFilterTab[tabName];
+      default:
+        state.isLogoTexture = true;
+        state.isFullTexture = false;
+    }
+  }
+
 
   return (
     <AnimatePresence>
