@@ -35,6 +35,7 @@ const Customizer = () => {
         return <FilePicker
         file={file}
         setFile={setFile}
+        readFile={readFile}
         />
       case "aipicker":
         return <AIPicker />
@@ -67,6 +68,13 @@ const Customizer = () => {
     }
   }
 
+  const readFile = (type) => {
+    reader(file)
+      .then((result) => {
+        handleDecals(type, result);
+        setActvieEditorTab("");
+      })
+  }
 
   return (
     <AnimatePresence>
